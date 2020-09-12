@@ -1694,7 +1694,7 @@ def get_index_base():
 
 def main():
     python = sys.executable or 'python'
-    pip_version = StrictVersion(check_output([python, '-m', 'pip', '--version'])
+    pip_version = StrictVersion(check_output(['pip', '--version'])
                                 .decode('utf-8').split()[1])
     has_pip_cache = pip_version >= StrictVersion('6.0')
     index_base = get_index_base()
@@ -1705,7 +1705,7 @@ def main():
                                      digest)
                      for path, digest in PACKAGES]
         # Calling pip as a module is the preferred way to avoid problems about pip self-upgrade.
-        command = [python, '-m', 'pip', 'install', '--no-index', '--no-deps', '-U']
+        command = ['pip', 'install', '--no-index', '--no-deps', '-U']
         # Disable cache since it is not used and it otherwise sometimes throws permission warnings:
         command.extend(['--no-cache-dir'] if has_pip_cache else [])
         command.extend(downloads)
